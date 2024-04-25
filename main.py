@@ -23,8 +23,7 @@ class Api:
         self._serial = None
         self.received_queue = Queue()
 
-    @staticmethod
-    def get_usable_ports():
+    def get_usable_ports(self):
         ports = [{"value": p, "text": p} for p in Serial.get_usable_ports()]
         if not ports:
             ports = [{"value": "", "text": "没有可用串口"}]
