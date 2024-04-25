@@ -1,6 +1,7 @@
 # 串口小助手
 ## 功能说明
 串口小助手是一个硬件调试辅助软件，本软件使用Python+pywebview+EasyUI+Vue3+ThreeJS+Echarts开发，支持串口调试，数据曲线绘制，飞控调试等功能。
+![示例图片](https://raw.githubusercontent.com/lixk/serial-helper/main/images/sample1.jpg)
 
 ### 串口调试
 串口调试功能是基本功能，主要用于串口数据收发调试。操作流程如下：
