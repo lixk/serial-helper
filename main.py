@@ -23,7 +23,8 @@ class Api:
         self._serial = None
         self.received_queue = Queue()
 
-    def get_usable_ports(self):
+    @staticmethod
+    def get_usable_ports():
         ports = [{"value": p, "text": p} for p in Serial.get_usable_ports()]
         if not ports:
             ports = [{"value": "", "text": "没有可用串口"}]
@@ -48,6 +49,8 @@ class Api:
         return data
 
     def send_serial_data(self, data):
+        if not self._serial:
+            return Response(1, '请先打开串口！').todict()
         try:
             self._serial.write(data)
         except Exception as e:

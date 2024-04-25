@@ -168,24 +168,31 @@ function parseDataItem(data) {
         <!-- <Label for="sendData" align="top">发送数据：</Label> -->
         <TextBox inputId="sendData" :multiline="true" v-model="sendData"
           style="width: calc(100% - 90px); height: 70px; border-width: 0px" placeholder="输入数据"></TextBox>
-        <LinkButton btnCls="c1" iconCls="icon-large-smartart" style="width: 70px;height: 70px;margin: 5px 10px;" size="large" iconAlign="top"
-          @click="serialButtonSendClick">
+        <LinkButton btnCls="c1" iconCls="icon-large-smartart" style="width: 70px;height: 70px;margin: 5px 10px;"
+          size="large" iconAlign="top" @click="serialButtonSendClick">
           发送</LinkButton>
       </Panel>
       <Panel title="辅助工具" :bodyStyle="{ padding: '20px' }" :border=false>
         <div style="color: greenyellow;">
-        数据曲线：<SwitchButton class="rounded" v-model="lineChartState" onText="开启" offText="关闭"></SwitchButton>
-        &nbsp&nbsp
-        <span style="font-size: 20;color: #ada;border: 1px dotted greenyellow;padding: 3px;">数据格式："x=1,y=2,z=3"</span>
-        <br><br>
-        飞控调试：<SwitchButton class="rounded" v-model="flyControlState" onText="开启" offText="关闭"></SwitchButton>
-        &nbsp&nbsp
-        <span style="font-size: 20;color: #ada;border: 1px dotted greenyellow;padding: 3px;">数据格式："x=1,y=2,z=3"，x/y/z为各轴向旋转角度</span>
-        <br><br>
-        <!-- 关于作者：<SwitchButton class="rounded" v-model="flyControlState" onText="开启" offText="关闭"></SwitchButton>
-        &nbsp&nbsp
-        <span style="font-size: 20;color: #ada;border: 1px dotted greenyellow;padding: 3px;">数据格式："x=1,y=2,z=3"，x/y/z为各轴向旋转角度</span> -->
-      </div>
+          数据曲线：<SwitchButton class="rounded" v-model="lineChartState" onText="开启" offText="关闭"></SwitchButton>
+          &nbsp&nbsp
+          <span style="font-size: 20;color: #ada;border: 1px dotted greenyellow;padding: 3px;">数据格式："x=1,y=2,z=3"</span>
+          <br><br>
+          飞控调试：<SwitchButton class="rounded" v-model="flyControlState" onText="开启" offText="关闭"></SwitchButton>
+          &nbsp&nbsp
+          <span
+            style="font-size: 20;color: #ada;border: 1px dotted greenyellow;padding: 3px;">数据格式："x=1,y=2,z=3"，x/y/z为各轴向旋转角度</span>
+          <br><br> 
+          <div>
+            <LinkButton @click="$refs.about.open()">项目简介</LinkButton>
+            <Dialog ref="about" :title="'项目简介'" :dialogStyle="{ width: '640px', height: '500px',opacity: 0.8 }" :closed="true" 
+               :modal="true" :draggable="false" :resizable="false">
+              <p style="text-align:center;margin:50px 0;font-size:16px">项目地址：https://github.com/lixk/serial-helper</p>
+              <p style="text-align:center;margin:50px 0;font-size:16px">作者简介：一个爱折腾，爱玩硬件的后端开发，欢迎一起交流学习。邮箱：1749498702@qq.com，微信：tensorfree</p>
+            </Dialog>
+          </div>
+
+        </div>
       </Panel>
     </LayoutPanel>
   </Layout>

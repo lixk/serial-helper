@@ -6,15 +6,15 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { onMounted } from 'vue'
 import bus from './eventBus'
 
-const D2R = Math.PI/180 // 角度转弧度
+const D2R = Math.PI / 180 // 角度转弧度
 
 onMounted(() => {
-	const rotation = {}
+	const rotation = { x: 0, y: 0, z: 0 }
 	initScene(rotation)
 	bus.on('flyControlData', function (dataItem) {
-		rotation.x = dataItem['x']
-		rotation.y = dataItem['y']
-		rotation.z = dataItem['z']
+		rotation.x = (dataItem['x'] || 0) * D2R
+		rotation.y = (dataItem['y'] || 0) * D2R
+		rotation.z = (dataItem['z'] || 0) * D2R
 	})
 })
 
@@ -26,7 +26,7 @@ function initScene(rotation) {
 	const scene = new THREE.Scene()
 	// 创建相机
 	const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000)
-	
+
 	// 设置相机位置
 	camera.position.z = 35
 	// 添加环境光
@@ -46,7 +46,7 @@ function initScene(rotation) {
 	// scene.background = bgTexture
 	scene.add(new THREE.AxesHelper(120))
 	scene.add(new THREE.GridHelper(100))
-	const controls = new OrbitControls( camera, renderer.domElement )
+	const controls = new OrbitControls(camera, renderer.domElement)
 	// 加载飞机模型
 	const planeLoader = new GLTFLoader();
 	planeLoader.load("/static/plane.glb", (gltf) => {
@@ -54,9 +54,9 @@ function initScene(rotation) {
 		scene.add(root)
 		//显示动画
 		function animation(time) {
-			root.rotation.x = (rotation['x'] || 0) * D2R;
-			root.rotation.y = (rotation['y'] || 0) * D2R;
-			root.rotation.z = (rotation['z'] || 0) * D2R;
+			root.rotation.x = rotation.x
+			root.rotation.y = rotation.y
+			root.rotation.z = rotation.z
 			controls.update();
 			renderer.render(scene, camera);
 		}
